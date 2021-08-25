@@ -1,0 +1,45 @@
+buildscript {
+
+    ext {
+
+        //TODO Params: Application Id
+        applicationId = "com.temp.testaf"
+
+        //TODO Params: App Name
+        app_name = "TestQaFlutter"
+
+        //TODO Params: Facebook
+        facebook_app_id = "1213341472362011"
+
+    }
+
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
